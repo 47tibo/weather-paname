@@ -1,9 +1,14 @@
 import * as React from 'react';
+import {useState, useEffect} from 'react';
 import {FlatList, StyleSheet, View, Text, ScrollView} from 'react-native';
-import styled from 'styled-components'
+import styled from 'styled-components/native'
 import {
   responsiveWidth,
 } from "react-native-responsive-dimensions";
+import useAxios from 'axios-hooks'
+
+
+export const API_KEY = '345e941e9f02f909c7f3a37e078a3904'; // 47tibo-weather
 
 const DATA = [
   {
@@ -39,22 +44,31 @@ const DATA = [
   },
 ];
 
-const viewabilityConfig = {
-  itemVisiblePercentThreshold: 100
-}
+const scrolling = (e) => {
+  console.log(e.nativeEvent.contentOffset.x);
+};
+
+const lat = '44.133160';
+const lon = '0.660590';
 
 export default function ScrollHour() {
+  const [{ data, loading, error }, getWeather] = useAxios(
+    `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${API_KEY}`
+  );
+  
   return (
     <View style={{height: 80}} >
       <ScrollView
-        snapToInterval={190}
+        snapToInterval={responsiveWidth(33)}
         horizontal= {true}
         decelerationRate="fast"
         bounces={false}
         showsHorizontalScrollIndicator={false}
+        onScroll={getWeather}
       >
       {DATA.map(item => Item(item))}
     </ScrollView>
+    <Title>{JSON.stringify(data)}</Title>
     </View>
   );
 }
