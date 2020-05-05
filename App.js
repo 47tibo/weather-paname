@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {StyleSheet, View, SafeAreaView} from 'react-native';
+import {SafeAreaView, StyleSheet, Text} from 'react-native';
 import {SplashScreen} from 'expo';
 import * as Font from 'expo-font';
 import {Ionicons} from '@expo/vector-icons';
@@ -30,13 +30,22 @@ export default function App(props) {
 
     loadResourcesAndDataAsync();
   }, []);
+  
+
+  
+  const [index, setIndex] = React.useState(0);
+  
+  
 
   if (!isLoadingComplete && !props.skipLoadingScreen) {
     return null;
   } else {
     return (
       <SafeAreaView style={styles.container}>
-        <ScrollHour/>
+        <ScrollHour
+          onHourChange={(hourIndex) => setIndex(hourIndex)}
+        />
+        <Text>{JSON.stringify(index)}</Text>
       </SafeAreaView>
     );
   }
