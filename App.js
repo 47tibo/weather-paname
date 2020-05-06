@@ -35,7 +35,7 @@ export default function App(props) {
 
   
   const [index, setIndex] = React.useState(0);
-  
+  const [day, setDay] = React.useState(0);
   
 
   if (!isLoadingComplete && !props.skipLoadingScreen) {
@@ -47,7 +47,10 @@ export default function App(props) {
           onHourChange={(hourIndex) => setIndex(hourIndex)}
         />
         <Text>{JSON.stringify(index)}</Text>
-        <ScrollDay />
+        <ScrollDay
+          onDayChange={(day) => setDay(day)}
+        />
+        <Text>{JSON.stringify(day.item)}</Text>
       </SafeAreaView>
     );
   }

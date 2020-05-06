@@ -51,9 +51,17 @@ const DATA = [
 ];
 
 const fullWidth = responsiveWidth(100);
-const dayWidth = responsiveWidth(25);
+const dayWidth = responsiveWidth(33);
 
-export default function ScrollDay() {
+export default function ScrollDay({onDayChange}) {
+  const onViewRef = React.useRef(info => {
+    // 2 or 3 items visible entirely
+    const viewableItems = info.viewableItems;
+    const length = viewableItems.length;
+    onDayChange(viewableItems[length - 2]);
+  });
+  const viewConfigRef = React.useRef({ viewAreaCoveragePercentThreshold: 100 });
+  
   return (
     <View style={{height: 80, width: fullWidth}} >
       <FlatList
@@ -62,6 +70,10 @@ export default function ScrollDay() {
         keyExtractor={item => item.id}
         horizontal= {true}
         showsHorizontalScrollIndicator={false}
+        viewabilityConfig={viewConfigRef.current}
+        onViewableItemsChanged={onViewRef.current}
+        bounces={false}
+        scrollEventThrottle={16}
       />
     </View>
   );
