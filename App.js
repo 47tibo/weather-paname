@@ -4,6 +4,7 @@ import {SplashScreen} from 'expo';
 import * as Font from 'expo-font';
 import {Ionicons} from '@expo/vector-icons';
 import ScrollHour from './components/ScrollHour';
+import ScrollDay from './components/ScrollDay';
 
 export default function App(props) {
   const [isLoadingComplete, setLoadingComplete] = React.useState(false);
@@ -46,6 +47,7 @@ export default function App(props) {
           onHourChange={(hourIndex) => setIndex(hourIndex)}
         />
         <Text>{JSON.stringify(index)}</Text>
+        <ScrollDay />
       </SafeAreaView>
     );
   }

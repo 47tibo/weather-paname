@@ -4,7 +4,7 @@ import styled from 'styled-components/native'
 import {responsiveWidth,} from "react-native-responsive-dimensions";
 
 const HOURS = [];
-for (let i = 0; i < 24; i += 1) {
+for (let i = 1; i < 25; i += 1) {
   HOURS.push({value: `${i}:00`});
 }
 
@@ -28,15 +28,15 @@ export default function ScrollHour({onHourChange}) {
         scrollEventThrottle={500}
         onScroll={onScroll}
       >
-        {HOURS.map(hour => Hour(hour))}
+        {HOURS.map(hour => <Hour value={hour.value} key={hour.value}/>)}
       </ScrollView>
     </View>
   );
 }
 
-function Hour({ value }) {
+function Hour({value}) {
   return (
-    <View style={styles.hour} key={value}>
+    <View style={styles.hour}>
       <Title>{value}</Title>
     </View>
   );
