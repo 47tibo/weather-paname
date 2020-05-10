@@ -3,7 +3,6 @@ import styled from 'styled-components/native';
 import * as React from 'react';
 import {responsiveWidth} from 'react-native-responsive-dimensions';
 
-const fullWidth = responsiveWidth(100);
 const dayWidth = responsiveWidth(33);
 
 export default function ScrollDay({days, onDayChange}) {
@@ -14,11 +13,12 @@ export default function ScrollDay({days, onDayChange}) {
     onDayChange(viewableItems[length - 2]);
   });
   const viewConfigRef = React.useRef({ viewAreaCoveragePercentThreshold: 100 });
+  const paddedDays = [{key: 'first_empty'}].concat(days).concat([{key: 'last_empty'}]);
   
   return (
-    <View style={{height: 80, width: fullWidth}} >
+    <View style={{height: 80}} >
       <FlatList
-        data={days}
+        data={paddedDays}
         renderItem={({item}) => <Day value={item} />}
         keyExtractor={day => day.key}
         horizontal={true}
@@ -33,11 +33,19 @@ export default function ScrollDay({days, onDayChange}) {
 }
 
 function Day({value}) {
-  return (
-    <View style={styles.day}>
-      <Title>{value.weekday}</Title>
-    </View>
-  );
+  if(value.weekday) {
+    return (
+      <View style={styles.day}>
+        <Title>{value.weekday}</Title>
+        <Title>{value.day}</Title>
+        <Title>{value.month}</Title>
+      </View>
+    );
+  } else {
+    return (
+      <View style={styles.day}/>
+    );
+  }
 }
 
 const styles = StyleSheet.create({

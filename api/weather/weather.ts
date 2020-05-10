@@ -2,6 +2,7 @@ import {WEATHER_URL} from '../constants';
 import axios from 'axios';
 import { Day, WeatherResponse } from './weather.model';
 import * as Localization from 'expo-localization';
+import { capitalize } from '../../utils';
 
 export async function getWeather() {
   let response = await axios.get(WEATHER_URL);
@@ -13,7 +14,7 @@ export function getDays(weather: WeatherResponse): Day[] {
     const date = new Date(day.dt * 1000);
     return {
       key: day.dt.toString(),
-      weekday: date.toLocaleString(Localization.locale, {weekday: 'long'}),
+      weekday: capitalize(date.toLocaleString(Localization.locale, {weekday: 'long'})),
       month: date.toLocaleString(Localization.locale, {month: 'long'}),
       day: date.toLocaleString(Localization.locale, {day: '2-digit'})
     };
