@@ -1,13 +1,17 @@
 import * as React from 'react';
-import {SafeAreaView, StyleSheet, Text} from 'react-native';
+import {SafeAreaView, StyleSheet, Text, Button} from 'react-native';
 import {SplashScreen} from 'expo';
 import * as Font from 'expo-font';
 import {Ionicons} from '@expo/vector-icons';
 import ScrollHour from './components/ScrollHour';
 import ScrollDay from './components/ScrollDay';
+import {getDays, getWeather} from './api/weather/weather';
 
 export default function App(props) {
   const [isLoadingComplete, setLoadingComplete] = React.useState(false);
+  const [index, setIndex] = React.useState(0);
+  const [day, setDay] = React.useState(0);
+  const [weather, setWeather] = React.useState(null);
 
   // Load any resources or data that we need prior to rendering the app
   React.useEffect(() => {
@@ -20,6 +24,8 @@ export default function App(props) {
           ...Ionicons.font,
           'space-mono': require('./assets/fonts/SpaceMono-Regular.ttf'),
         });
+        const response = await getWeather();
+        setWeather(response);
       } catch (e) {
         // We might want to provide this error information to an error reporting service
         console.warn(e);
@@ -31,12 +37,6 @@ export default function App(props) {
 
     loadResourcesAndDataAsync();
   }, []);
-  
-
-  
-  const [index, setIndex] = React.useState(0);
-  const [day, setDay] = React.useState(0);
-  
 
   if (!isLoadingComplete && !props.skipLoadingScreen) {
     return null;
@@ -48,6 +48,7 @@ export default function App(props) {
         />
         <Text>{JSON.stringify(index)}</Text>
         <ScrollDay
+          days={getDays(weather)}
           onDayChange={(day) => setDay(day)}
         />
         <Text>{JSON.stringify(day.item)}</Text>

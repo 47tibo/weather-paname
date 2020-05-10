@@ -1,12 +1,7 @@
 import * as React from 'react';
 import {ScrollView, StyleSheet, View} from 'react-native';
-import styled from 'styled-components/native'
 import {responsiveWidth,} from "react-native-responsive-dimensions";
-
-const HOURS = [];
-for (let i = 1; i < 25; i += 1) {
-  HOURS.push({value: `${i}:00`});
-}
+import {HoursList} from './HoursList';
 
 const hourWidth = responsiveWidth(33);
 
@@ -18,7 +13,7 @@ export default function ScrollHour({onHourChange}) {
   }
   
   return (
-    <View style={{height: 80}} >
+    <View style={{height: 80}}>
       <ScrollView
         snapToInterval={hourWidth}
         horizontal= {true}
@@ -28,30 +23,18 @@ export default function ScrollHour({onHourChange}) {
         scrollEventThrottle={500}
         onScroll={onScroll}
       >
-        {HOURS.map(hour => <Hour value={hour.value} key={hour.value}/>)}
+        <View style={styles.emptyHour}>
+        </View>
+        {HoursList(hourWidth)}
       </ScrollView>
     </View>
   );
 }
 
-function Hour({value}) {
-  return (
-    <View style={styles.hour}>
-      <Title>{value}</Title>
-    </View>
-  );
-}
-
 const styles = StyleSheet.create({
-  hour: {
+  emptyHour: {
     backgroundColor: '#7183ff',
     width: hourWidth,
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center'
+    flex: 1
   }
 });
-
-const Title = styled.Text`
-  font-size: 20;
-`;

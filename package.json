@@ -34,12 +34,18 @@
     "react-native-screens": "~2.2.0",
     "react-native-web": "~0.11.7",
     "styled-components": "^5.1.0",
-    "@react-native-community/netinfo": "5.5.1"
+    "@react-native-community/netinfo": "5.5.1",
+    "expo-localization": "~8.1.0"
   },
   "devDependencies": {
     "@babel/core": "^7.8.6",
+    "@types/jest": "^25.2.1",
+    "@types/react": "^16.9.34",
+    "@types/react-native": "^0.62.7",
+    "@types/react-test-renderer": "^16.9.2",
     "babel-preset-expo": "~8.1.0",
-    "jest-expo": "~37.0.0"
+    "jest-expo": "~37.0.0",
+    "typescript": "^3.8.3"
   },
   "private": true
 }
