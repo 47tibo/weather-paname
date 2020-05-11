@@ -57,7 +57,7 @@ interface DailyWeather {
   uvi: number
 }
 
-export interface Day {
+export interface DayWeather {
   key: string
   weekday: string, // "Sat"
   month: string, // "June"

@@ -4,8 +4,8 @@ import {SplashScreen} from 'expo';
 import * as Font from 'expo-font';
 import {Ionicons} from '@expo/vector-icons';
 import ScrollHour from './components/ScrollHour';
-import ScrollDay from './components/ScrollDay';
 import {getDays, getWeather} from './api/weather/weather';
+import {ScrollDay} from './components/ScrollDay/ScrollDay';
 
 export default function App(props) {
   const [isLoadingComplete, setLoadingComplete] = React.useState(false);
@@ -51,7 +51,7 @@ export default function App(props) {
           days={getDays(weather)}
           onDayChange={(day) => setDay(day)}
         />
-        <Text>{JSON.stringify(day.item)}</Text>
+        <Text>{JSON.stringify(day)}</Text>
       </SafeAreaView>
     );
   }

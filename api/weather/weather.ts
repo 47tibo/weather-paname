@@ -1,6 +1,6 @@
 import {WEATHER_URL} from '../constants';
 import axios from 'axios';
-import { Day, WeatherResponse } from './weather.model';
+import { DayWeather, WeatherResponse } from './weather.model';
 import * as Localization from 'expo-localization';
 import { capitalize } from '../../utils';
 
@@ -9,7 +9,7 @@ export async function getWeather() {
   return response.data;
 }
 
-export function getDays(weather: WeatherResponse): Day[] {
+export function getDays(weather: WeatherResponse): DayWeather[] {
   return weather.daily.map(day => {
     const date = new Date(day.dt * 1000);
     return {

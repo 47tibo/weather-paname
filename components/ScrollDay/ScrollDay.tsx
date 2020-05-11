@@ -1,20 +1,26 @@
-import {StyleSheet, View, FlatList, ScrollView} from 'react-native';
+import {StyleSheet, View, FlatList} from 'react-native';
 import styled from 'styled-components/native';
 import * as React from 'react';
 import {responsiveWidth} from 'react-native-responsive-dimensions';
+import { ScrollDayProps, SelectedDay } from './ScrollDay.model';
 
 const dayWidth = responsiveWidth(33);
 
-export default function ScrollDay({days, onDayChange}) {
+export const ScrollDay: React.FC<ScrollDayProps> = ({days, onDayChange}) => {
   const onViewRef = React.useRef(info => {
     // 2 or 3 items visible entirely
     const viewableItems = info.viewableItems;
     const length = viewableItems.length;
-    onDayChange(viewableItems[length - 2]);
+    const itemCenter = viewableItems[length - 2];
+    const day: SelectedDay = {
+      dt: itemCenter.item.dt,
+      isToday: itemCenter.index === 1
+    };
+    onDayChange(day);
   });
   const viewConfigRef = React.useRef({ viewAreaCoveragePercentThreshold: 100 });
   const paddedDays = [{key: 'first_empty'}].concat(days).concat([{key: 'last_empty'}]);
-  
+
   return (
     <View style={{height: 80}} >
       <FlatList
@@ -30,7 +36,7 @@ export default function ScrollDay({days, onDayChange}) {
       />
     </View>
   );
-}
+};
 
 function Day({value}) {
   if(value.weekday) {
