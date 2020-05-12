@@ -3,8 +3,8 @@ import {SafeAreaView, StyleSheet, Text, Button} from 'react-native';
 import {SplashScreen} from 'expo';
 import * as Font from 'expo-font';
 import {Ionicons} from '@expo/vector-icons';
-import ScrollHour from './components/ScrollHour';
-import {getDays, getWeather} from './api/weather/weather';
+import ScrollHour from './components/ScrollHour/ScrollHour';
+import {getDays, getHours, getWeather} from './api/weather/weather';
 import {ScrollDay} from './components/ScrollDay/ScrollDay';
 
 export default function App(props) {
@@ -44,6 +44,7 @@ export default function App(props) {
     return (
       <SafeAreaView style={styles.container}>
         <ScrollHour
+          hours={getHours(weather, day.isToday)}
           onHourChange={(hourIndex) => setIndex(hourIndex)}
         />
         <Text>{JSON.stringify(index)}</Text>

@@ -1,3 +1,7 @@
+// https://openweathermap.org/api/one-call-api
+
+import { HourSegment } from './weather.constants';
+
 export interface WeatherResponse {
   lat: string,
   lon: string,
@@ -58,8 +62,14 @@ interface DailyWeather {
 }
 
 export interface DayWeather {
-  key: string
+  dt: number
   weekday: string, // "Sat"
   month: string, // "June"
   day: string,
+}
+
+export interface HourWeather {
+  dt?: number
+  segment?: HourSegment,
+  hour: string
 }

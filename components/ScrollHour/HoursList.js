@@ -2,12 +2,7 @@ import * as React from 'react';
 import {StyleSheet, View} from 'react-native';
 import styled from 'styled-components/native';
 
-const HOURS = [];
-for (let i = 1; i < 25; i += 1) {
-  HOURS.push({value: `${i}:00`});
-}
-
-export function HoursList(hourWidth) {
+export function HoursList(hours, hourWidth) {
   const styles = StyleSheet.create({
     hour: {
       backgroundColor: '#7183ff',
@@ -19,12 +14,12 @@ export function HoursList(hourWidth) {
   });
   
   return (
-    HOURS.map(hour =>
+    hours.map(hour =>
       <View
         style={styles.hour}
-        key={hour.value}
+        key={(hour.dt || hour.segment).toString()}
       >
-        <Title>{hour.value}</Title>
+        <Title>{hour.hour}</Title>
       </View>
   ));
 }

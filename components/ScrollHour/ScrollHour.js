@@ -5,7 +5,7 @@ import {HoursList} from './HoursList';
 
 const hourWidth = responsiveWidth(33);
 
-export default function ScrollHour({onHourChange}) {
+export default function ScrollHour({hours, onHourChange}) {
   function onScroll(event) {
     const offsetX = event.nativeEvent.contentOffset.x;
     const index = Math.ceil(offsetX / hourWidth);
@@ -16,7 +16,7 @@ export default function ScrollHour({onHourChange}) {
     <View style={{height: 80}}>
       <ScrollView
         snapToInterval={hourWidth}
-        horizontal= {true}
+        horizontal={true}
         decelerationRate="fast"
         bounces={false}
         showsHorizontalScrollIndicator={false}
@@ -25,7 +25,7 @@ export default function ScrollHour({onHourChange}) {
       >
         <View style={styles.emptyHour}>
         </View>
-        {HoursList(hourWidth)}
+        {HoursList(hours, hourWidth)}
       </ScrollView>
     </View>
   );

@@ -1,4 +1,4 @@
-import { DayWeather } from '../../api/weather/weather.model';
+import { DayWeather } from '../../api/weather/weather.models';
 
 export type ScrollDayProps = {
   days: DayWeather[],

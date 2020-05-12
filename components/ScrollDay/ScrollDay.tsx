@@ -1,11 +1,10 @@
-import {StyleSheet, View, FlatList} from 'react-native';
+import { StyleSheet, View, FlatList } from 'react-native';
 import styled from 'styled-components/native';
 import * as React from 'react';
-import {responsiveWidth} from 'react-native-responsive-dimensions';
-import { ScrollDayProps, SelectedDay } from './ScrollDay.model';
+import { responsiveWidth } from 'react-native-responsive-dimensions';
+import { ScrollDayProps, SelectedDay } from './ScrollDay.models';
 
 const dayWidth = responsiveWidth(33);
-
 export const ScrollDay: React.FC<ScrollDayProps> = ({days, onDayChange}) => {
   const onViewRef = React.useRef(info => {
     // 2 or 3 items visible entirely
@@ -18,15 +17,15 @@ export const ScrollDay: React.FC<ScrollDayProps> = ({days, onDayChange}) => {
     };
     onDayChange(day);
   });
-  const viewConfigRef = React.useRef({ viewAreaCoveragePercentThreshold: 100 });
-  const paddedDays = [{key: 'first_empty'}].concat(days).concat([{key: 'last_empty'}]);
+  const viewConfigRef = React.useRef({viewAreaCoveragePercentThreshold: 100});
+  const paddedDays = [{dt: 1987}].concat(days).concat([{dt: 2020}]);
 
   return (
-    <View style={{height: 80}} >
+    <View style={{height: 80}}>
       <FlatList
         data={paddedDays}
-        renderItem={({item}) => <Day value={item} />}
-        keyExtractor={day => day.key}
+        renderItem={({item}) => <Day value={item}/>}
+        keyExtractor={day => day.dt.toString()}
         horizontal={true}
         showsHorizontalScrollIndicator={false}
         viewabilityConfig={viewConfigRef.current}
@@ -39,7 +38,7 @@ export const ScrollDay: React.FC<ScrollDayProps> = ({days, onDayChange}) => {
 };
 
 function Day({value}) {
-  if(value.weekday) {
+  if (value.weekday) {
     return (
       <View style={styles.day}>
         <Title>{value.weekday}</Title>
@@ -63,7 +62,6 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   }
 });
-
 const Title = styled.Text`
   font-size: 20;
 `;
