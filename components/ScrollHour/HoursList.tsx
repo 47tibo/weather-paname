@@ -1,8 +1,9 @@
 import * as React from 'react';
 import {StyleSheet, View} from 'react-native';
 import styled from 'styled-components/native';
+import { HourWeather } from '../../api/weather/weather.models';
 
-export function HoursList(hours, hourWidth) {
+export function HoursList(hours: HourWeather[], hourWidth: number) {
   const styles = StyleSheet.create({
     hour: {
       backgroundColor: '#7183ff',
@@ -12,7 +13,7 @@ export function HoursList(hours, hourWidth) {
       alignItems: 'center'
     }
   });
-  
+
   return (
     hours.map(hour =>
       <View

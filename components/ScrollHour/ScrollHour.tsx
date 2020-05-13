@@ -2,16 +2,17 @@ import * as React from 'react';
 import {ScrollView, StyleSheet, View} from 'react-native';
 import {responsiveWidth,} from "react-native-responsive-dimensions";
 import {HoursList} from './HoursList';
+import { ScrollHourProps } from './ScrollHour.models';
 
 const hourWidth = responsiveWidth(33);
 
-export default function ScrollHour({hours, onHourChange}) {
+export const ScrollHour: React.FC<ScrollHourProps> = ({hours, onHourChange}) => {
   function onScroll(event) {
     const offsetX = event.nativeEvent.contentOffset.x;
     const index = Math.ceil(offsetX / hourWidth);
-    onHourChange(index);
+    onHourChange(hours[index]);
   }
-  
+
   return (
     <View style={{height: 80}}>
       <ScrollView

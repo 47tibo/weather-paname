@@ -1,12 +1,12 @@
-import { StyleSheet, View, FlatList } from 'react-native';
+import { FlatList, StyleSheet, View } from 'react-native';
 import styled from 'styled-components/native';
 import * as React from 'react';
 import { responsiveWidth } from 'react-native-responsive-dimensions';
-import { ScrollDayProps, SelectedDay } from './ScrollDay.models';
+import { DayProps, ScrollDayProps, SelectedDay, ViewableItemsChangedInfo } from './ScrollDay.models';
 
 const dayWidth = responsiveWidth(33);
 export const ScrollDay: React.FC<ScrollDayProps> = ({days, onDayChange}) => {
-  const onViewRef = React.useRef(info => {
+  const onViewRef = React.useRef((info: ViewableItemsChangedInfo) => {
     // 2 or 3 items visible entirely
     const viewableItems = info.viewableItems;
     const length = viewableItems.length;
@@ -18,7 +18,7 @@ export const ScrollDay: React.FC<ScrollDayProps> = ({days, onDayChange}) => {
     onDayChange(day);
   });
   const viewConfigRef = React.useRef({viewAreaCoveragePercentThreshold: 100});
-  const paddedDays = [{dt: 1987}].concat(days).concat([{dt: 2020}]);
+  const paddedDays = [{dt: 1987}].concat(days).concat([{dt: 2020}]); // dummy data
 
   return (
     <View style={{height: 80}}>
@@ -37,7 +37,7 @@ export const ScrollDay: React.FC<ScrollDayProps> = ({days, onDayChange}) => {
   );
 };
 
-function Day({value}) {
+const Day: React.FC<DayProps> = ({value}) => {
   if (value.weekday) {
     return (
       <View style={styles.day}>
