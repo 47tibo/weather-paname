@@ -18,7 +18,7 @@ export function HoursList(hours: HourWeather[], hourWidth: number) {
     hours.map(hour =>
       <View
         style={styles.hour}
-        key={(hour.dt || hour.segment).toString()}
+        key={hour.isSegment ? hour.dt : hour.dt.toString()}
       >
         <Title>{hour.hour}</Title>
       </View>

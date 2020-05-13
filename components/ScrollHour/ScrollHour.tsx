@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {ScrollView, StyleSheet, View} from 'react-native';
+import { NativeScrollEvent, NativeSyntheticEvent, ScrollView, StyleSheet, View } from 'react-native';
 import {responsiveWidth,} from "react-native-responsive-dimensions";
 import {HoursList} from './HoursList';
 import { ScrollHourProps } from './ScrollHour.models';
@@ -7,7 +7,7 @@ import { ScrollHourProps } from './ScrollHour.models';
 const hourWidth = responsiveWidth(33);
 
 export const ScrollHour: React.FC<ScrollHourProps> = ({hours, onHourChange}) => {
-  function onScroll(event) {
+  function onScroll(event: NativeSyntheticEvent<NativeScrollEvent>) {
     const offsetX = event.nativeEvent.contentOffset.x;
     const index = Math.ceil(offsetX / hourWidth);
     onHourChange(hours[index]);
@@ -27,10 +27,12 @@ export const ScrollHour: React.FC<ScrollHourProps> = ({hours, onHourChange}) => 
         <View style={styles.emptyHour}>
         </View>
         {HoursList(hours, hourWidth)}
+        <View style={styles.emptyHour}>
+        </View>
       </ScrollView>
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   emptyHour: {

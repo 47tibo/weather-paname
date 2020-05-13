@@ -69,7 +69,7 @@ export interface DayWeather {
 }
 
 export interface HourWeather {
-  dt: number
-  segment: HourSegment,
+  isSegment: boolean;
+  dt: number | HourSegment;
   hour: string
 }

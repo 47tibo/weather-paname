@@ -3,8 +3,19 @@ import styled from 'styled-components/native';
 import * as React from 'react';
 import { responsiveWidth } from 'react-native-responsive-dimensions';
 import { DayProps, ScrollDayProps, SelectedDay, ViewableItemsChangedInfo } from './ScrollDay.models';
+import { DayWeather } from '../../api/weather/weather.models';
 
 const dayWidth = responsiveWidth(33);
+
+function emptyDayWeather(): DayWeather {
+  return {
+    dt: Math.random(),
+    day: '',
+    month: '',
+    weekday: '',
+  };
+}
+
 export const ScrollDay: React.FC<ScrollDayProps> = ({days, onDayChange}) => {
   const onViewRef = React.useRef((info: ViewableItemsChangedInfo) => {
     // 2 or 3 items visible entirely
@@ -18,7 +29,7 @@ export const ScrollDay: React.FC<ScrollDayProps> = ({days, onDayChange}) => {
     onDayChange(day);
   });
   const viewConfigRef = React.useRef({viewAreaCoveragePercentThreshold: 100});
-  const paddedDays = [{dt: 1987}].concat(days).concat([{dt: 2020}]); // dummy data
+  const paddedDays = [emptyDayWeather()].concat(days).concat([emptyDayWeather()]);
 
   return (
     <View style={{height: 80}}>

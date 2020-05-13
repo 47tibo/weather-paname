@@ -27,10 +27,16 @@ export function getHours(weather: WeatherResponse, isToday: boolean): HourWeathe
       const date = new Date(hourly.dt * 1000);
       return {
         dt: hourly.dt,
-        hour: `${date.getHours()}:00`
+        hour: `${date.getHours()}:00`,
+        isSegment: false
       }
     });
   } else {
-      return FrenchHoursSegments;
+      return FrenchHoursSegments.map(segment => {
+        return {
+          ...segment,
+          isSegment: true
+        }
+      });
   }
 }

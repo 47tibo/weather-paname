@@ -27,19 +27,19 @@ export enum FrenchMonths {
 
 export const FrenchHoursSegments = [
   {
-    segment: HourSegment.morning,
+    dt: HourSegment.morning,
     hour: 'Matin'
   },
   {
-    segment: HourSegment.day,
+    dt: HourSegment.day,
     hour: 'Midi'
   },
   {
-    segment: HourSegment.eve,
+    dt: HourSegment.eve,
     hour: 'Soirée'
   },
   {
-    segment: HourSegment.night,
+    dt: HourSegment.night,
     hour: 'Nuit'
   }
 ];
