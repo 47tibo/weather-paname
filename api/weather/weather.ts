@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { WEATHER_URL } from '../api.constants';
-import { getDate, getMonth, getWeekDay } from '../../utils/date/date.utils';
+import { getDate, getMonth, getWeekDay, isSameDay } from '../../utils/date/date.utils';
 import { DayWeather, HourWeather, WeatherResponse } from './weather.models';
 import { FrenchHoursSegments } from '../../utils/date/date.constants';
 
@@ -23,10 +23,16 @@ export function getDays(weather: WeatherResponse): DayWeather[] {
 
 export function getHours(weather: WeatherResponse, isToday: boolean): HourWeather[] {
   if (isToday) {
-    return weather.hourly.map(hourly => {
-      const date = new Date(hourly.dt * 1000);
+    // weather api returns hours for the next 3 days, we only want today
+    const hours = weather.hourly;
+    const today = new Date(hours[0].dt * 1000);
+    const todayHours = hours.filter(hour =>
+      isSameDay(today, new Date(hour.dt * 1000))
+    );
+    return todayHours.map(hour => {
+      const date = new Date(hour.dt * 1000);
       return {
-        dt: hourly.dt,
+        dt: hour.dt,
         hour: `${date.getHours()}:00`,
         isSegment: false
       }

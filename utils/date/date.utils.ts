@@ -20,3 +20,7 @@ export function getMonth(date: Date, isCapitalized = false): string {
 export function getDate(date: Date): string {
   return date.getDate().toString();
 }
+
+export function isSameDay(date1: Date, date2: Date): boolean {
+  return date1.getDate() === date2.getDate();
+}

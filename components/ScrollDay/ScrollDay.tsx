@@ -7,9 +7,47 @@ import { DayWeather } from '../../api/weather/weather.models';
 
 const dayWidth = responsiveWidth(33);
 
-function emptyDayWeather(): DayWeather {
+const Day: React.FC<DayProps> = ({value}) => {
+  if (value.weekday) {
+    return (
+      <View style={styles.day}>
+        <Title>{value.weekday}</Title>
+        <Title>{value.day}</Title>
+        <Title>{value.month}</Title>
+      </View>
+    );
+  } else {
+    return (
+      <View style={styles.day}/>
+    );
+  }
+};
+
+const styles = StyleSheet.create({
+  day: {
+    backgroundColor: '#ff51db',
+    width: dayWidth,
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center'
+  }
+});
+const Title = styled.Text`
+  font-size: 20;
+`;
+
+function emptyDayWeather1(): DayWeather {
   return {
-    dt: Math.random(),
+    dt: 47,
+    day: '',
+    month: '',
+    weekday: '',
+  };
+}
+
+function emptyDayWeather2(): DayWeather {
+  return {
+    dt: 1515,
     day: '',
     month: '',
     weekday: '',
@@ -29,7 +67,7 @@ export const ScrollDay: React.FC<ScrollDayProps> = ({days, onDayChange}) => {
     onDayChange(day);
   });
   const viewConfigRef = React.useRef({viewAreaCoveragePercentThreshold: 100});
-  const paddedDays = [emptyDayWeather()].concat(days).concat([emptyDayWeather()]);
+  const paddedDays = [emptyDayWeather1()].concat(days).concat([emptyDayWeather2()]);
 
   return (
     <View style={{height: 80}}>
@@ -47,32 +85,3 @@ export const ScrollDay: React.FC<ScrollDayProps> = ({days, onDayChange}) => {
     </View>
   );
 };
-
-const Day: React.FC<DayProps> = ({value}) => {
-  if (value.weekday) {
-    return (
-      <View style={styles.day}>
-        <Title>{value.weekday}</Title>
-        <Title>{value.day}</Title>
-        <Title>{value.month}</Title>
-      </View>
-    );
-  } else {
-    return (
-      <View style={styles.day}/>
-    );
-  }
-}
-
-const styles = StyleSheet.create({
-  day: {
-    backgroundColor: '#ff51db',
-    width: dayWidth,
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center'
-  }
-});
-const Title = styled.Text`
-  font-size: 20;
-`;
