@@ -9,40 +9,52 @@ export async function getWeather() {
   return response.data;
 }
 
-export function getDays(weather: WeatherResponse): DayWeather[] {
-  return weather.daily.map(day => {
-    const date = new Date(day.dt * 1000);
-    return {
-      dt: day.dt,
-      weekday: getWeekDay(date, true),
-      month: getMonth(date),
-      day: getDate(date)
-    };
-  });
-}
-
-export function getHours(weather: WeatherResponse, isToday: boolean): HourWeather[] {
-  if (isToday) {
-    // weather api returns hours for the next 3 days, we only want today
-    const hours = weather.hourly;
-    const today = new Date(hours[0].dt * 1000);
-    const todayHours = hours.filter(hour =>
-      isSameDay(today, new Date(hour.dt * 1000))
-    );
-    return todayHours.map(hour => {
-      const date = new Date(hour.dt * 1000);
+export function getDays(weather: WeatherResponse | null): DayWeather[] {
+  if (weather) {
+    return weather.daily.map(day => {
+      const date = new Date(day.dt * 1000);
       return {
-        dt: hour.dt,
-        hour: `${date.getHours()}:00`,
-        isSegment: false
-      }
+        dt: day.dt,
+        weekday: getWeekDay(date, true),
+        month: getMonth(date),
+        day: getDate(date)
+      };
     });
   } else {
+    return [];
+  }
+}
+
+export function getHours(weather: WeatherResponse | null, isToday: boolean | undefined): HourWeather[] {
+  if (weather) {
+    if (isToday) {
+      // weather api returns hours for the next 3 days, we only want today
+      const hours = weather.hourly;
+      const today = new Date(hours[0].dt * 1000);
+      const todayHours = hours.filter(hour =>
+        isSameDay(today, new Date(hour.dt * 1000))
+      );
+      return todayHours.map(hour => {
+        const date = new Date(hour.dt * 1000);
+        return {
+          dt: hour.dt,
+          hour: `${date.getHours()}:00`,
+          isSegment: false
+        }
+      });
+    } else {
       return FrenchHoursSegments.map(segment => {
         return {
           ...segment,
           isSegment: true
         }
       });
+    }
+  } else {
+    return [];
   }
+}
+
+export function getCurrentWeather(hour: HourWeather, weather: WeatherResponse) {
+
 }

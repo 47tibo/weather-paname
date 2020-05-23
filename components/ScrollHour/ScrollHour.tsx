@@ -1,12 +1,18 @@
 import * as React from 'react';
-import { NativeScrollEvent, NativeSyntheticEvent, ScrollView, StyleSheet, View } from 'react-native';
+import { NativeScrollEvent, NativeSyntheticEvent, ScrollView, ScrollViewComponent, StyleSheet, View } from 'react-native';
 import {responsiveWidth,} from "react-native-responsive-dimensions";
 import {HoursList} from './HoursList';
 import { ScrollHourProps } from './ScrollHour.models';
 
 const hourWidth = responsiveWidth(33);
 
-export const ScrollHour: React.FC<ScrollHourProps> = ({hours, onHourChange}) => {
+const ScrollHourComponent: React.FC<ScrollHourProps> = ({hours, onHourChange}) => {
+  const scrollViewRef = React.useRef<any>(null);
+  React.useEffect(() => {
+    scrollViewRef.current.scrollTo({x: 0});
+
+  }, [hours]);
+
   function onScroll(event: NativeSyntheticEvent<NativeScrollEvent>) {
     const offsetX = event.nativeEvent.contentOffset.x;
     const index = Math.ceil(offsetX / hourWidth);
@@ -16,6 +22,7 @@ export const ScrollHour: React.FC<ScrollHourProps> = ({hours, onHourChange}) => 
   return (
     <View style={{height: 80}}>
       <ScrollView
+        ref={scrollViewRef}
         snapToInterval={hourWidth}
         horizontal={true}
         decelerationRate="fast"
@@ -41,3 +48,5 @@ const styles = StyleSheet.create({
     flex: 1
   }
 });
+
+export const ScrollHour = React.memo(ScrollHourComponent);

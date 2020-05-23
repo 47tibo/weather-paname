@@ -6,12 +6,15 @@ import {Ionicons} from '@expo/vector-icons';
 import {getDays, getHours, getWeather} from './api/weather/weather';
 import {ScrollDay} from './components/ScrollDay/ScrollDay';
 import {ScrollHour} from './components/ScrollHour/ScrollHour';
+import { HourWeather, WeatherResponse } from './api/weather/weather.models';
+import { AppProps } from './App.models';
+import { SelectedDay } from './components/ScrollDay/ScrollDay.models';
 
-export default function App(props) {
+const App: React.FC<AppProps> = (props) => {
   const [isLoadingComplete, setLoadingComplete] = React.useState(false);
-  const [index, setIndex] = React.useState(0);
-  const [day, setDay] = React.useState(0);
-  const [weather, setWeather] = React.useState(null);
+  const [hour, setHour] = React.useState<HourWeather | null>(null);
+  const [day, setDay] = React.useState<SelectedDay | null>(null);
+  const [weather, setWeather] = React.useState<WeatherResponse | null>(null);
 
   // Load any resources or data that we need prior to rendering the app
   React.useEffect(() => {
@@ -38,25 +41,28 @@ export default function App(props) {
     loadResourcesAndDataAsync();
   }, []);
 
+  function updateHour(hour: HourWeather) {
+    //setHour(hour);
+  }
+
   if (!isLoadingComplete && !props.skipLoadingScreen) {
     return null;
   } else {
     return (
       <SafeAreaView style={styles.container}>
         <ScrollHour
-          hours={getHours(weather, day.isToday)}
-          onHourChange={(hourIndex) => setIndex(hourIndex)}
+          hours={getHours(weather, day?.isToday)}
+          onHourChange={updateHour}
         />
-        <Text>{JSON.stringify(index)}</Text>
         <ScrollDay
           days={getDays(weather)}
-          onDayChange={(day) => setDay(day)}
+          onDayChange={day => setDay(day)}
         />
         <Text>{JSON.stringify(day)}</Text>
       </SafeAreaView>
     );
   }
-}
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -64,3 +70,5 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
   },
 });
+
+export default App;
