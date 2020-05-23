@@ -6,11 +6,11 @@ import { ScrollHourProps } from './ScrollHour.models';
 
 const hourWidth = responsiveWidth(33);
 
-const ScrollHourComponent: React.FC<ScrollHourProps> = ({hours, onHourChange}) => {
+const ScrollHourComponent: React.FC<ScrollHourProps> = ({day, hours, onHourChange}) => {
   const scrollViewRef = React.useRef<any>(null);
   React.useEffect(() => {
     scrollViewRef.current.scrollTo({x: 0});
-
+    onHourChange(hours[0])
   }, [hours]);
 
   function onScroll(event: NativeSyntheticEvent<NativeScrollEvent>) {
@@ -49,4 +49,10 @@ const styles = StyleSheet.create({
   }
 });
 
-export const ScrollHour = React.memo(ScrollHourComponent);
+export const ScrollHour = React.memo(ScrollHourComponent, (prev, next) => {
+  if (prev.day?.isToday === false && next.day?.isToday === false) {
+    return prev.day.dt === next.day.dt;
+  } else {
+    return prev.day?.isToday === next.day?.isToday
+  }
+});

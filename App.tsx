@@ -41,24 +41,22 @@ const App: React.FC<AppProps> = (props) => {
     loadResourcesAndDataAsync();
   }, []);
 
-  function updateHour(hour: HourWeather) {
-    //setHour(hour);
-  }
-
   if (!isLoadingComplete && !props.skipLoadingScreen) {
     return null;
   } else {
     return (
       <SafeAreaView style={styles.container}>
         <ScrollHour
+          day={day}
           hours={getHours(weather, day?.isToday)}
-          onHourChange={updateHour}
+          onHourChange={hour => setHour(hour)}
         />
         <ScrollDay
           days={getDays(weather)}
           onDayChange={day => setDay(day)}
         />
         <Text>{JSON.stringify(day)}</Text>
+        <Text>{JSON.stringify(hour)}</Text>
       </SafeAreaView>
     );
   }
