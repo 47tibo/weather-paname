@@ -27,7 +27,7 @@ export enum FrenchMonths {
 
 export const FrenchHoursSegments = [
   {
-    dt: HourSegment.morning,
+    dt: HourSegment.morn,
     hour: 'Matin'
   },
   {

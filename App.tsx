@@ -3,7 +3,7 @@ import {SafeAreaView, StyleSheet, Text, Button} from 'react-native';
 import {SplashScreen} from 'expo';
 import * as Font from 'expo-font';
 import {Ionicons} from '@expo/vector-icons';
-import {getDays, getHours, getWeather} from './api/weather/weather';
+import { getCurrentWeather, getDays, getHours, getWeather } from './api/weather/weather';
 import {ScrollDay} from './components/ScrollDay/ScrollDay';
 import {ScrollHour} from './components/ScrollHour/ScrollHour';
 import { HourWeather, WeatherResponse } from './api/weather/weather.models';
@@ -55,8 +55,7 @@ const App: React.FC<AppProps> = (props) => {
           days={getDays(weather)}
           onDayChange={day => setDay(day)}
         />
-        <Text>{JSON.stringify(day)}</Text>
-        <Text>{JSON.stringify(hour)}</Text>
+        <Text>{JSON.stringify(getCurrentWeather(day, hour, weather))}</Text>
       </SafeAreaView>
     );
   }

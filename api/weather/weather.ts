@@ -1,8 +1,10 @@
 import axios from 'axios';
 import { WEATHER_URL } from '../api.constants';
 import { getDate, getMonth, getWeekDay, isSameDay } from '../../utils/date/date.utils';
-import { DayWeather, HourWeather, WeatherResponse } from './weather.models';
+import { DayWeather, HourlyWeather, HourWeather, WeatherResponse } from './weather.models';
 import { FrenchHoursSegments } from '../../utils/date/date.constants';
+import { SelectedDay } from '../../components/ScrollDay/ScrollDay.models';
+import { HourSegment } from './weather.constants';
 
 export async function getWeather() {
   let response = await axios.get(WEATHER_URL);
@@ -55,6 +57,33 @@ export function getHours(weather: WeatherResponse | null, isToday: boolean | und
   }
 }
 
-export function getCurrentWeather(hour: HourWeather, weather: WeatherResponse) {
-
+export function getCurrentWeather(currentDay: SelectedDay | null,
+                                  currentHour: HourWeather | null,
+                                  weather: WeatherResponse | null): HourlyWeather | null
+{
+  if (currentDay && currentHour && weather) {
+    if (currentDay.isToday) {
+      const hourlyWeather = weather.hourly.find(hour => hour.dt === currentHour.dt);
+      return hourlyWeather || null;
+    } else {
+      const day = weather.daily.find(day => day.dt === currentDay.dt);
+      if (day) {
+        const {
+          uvi,
+          sunset,
+          sunrise,
+          ...tempWeather
+        } = day;
+        const hourlyWeather: any = tempWeather;
+        const segment = HourSegment[currentHour.dt];
+        hourlyWeather.feels_like = hourlyWeather.feels_like[segment];
+        hourlyWeather.temp = hourlyWeather.temp[segment];
+        return hourlyWeather;
+      } else {
+        return null;
+      }
+    }
+  } else {
+    return null;
+  }
 }

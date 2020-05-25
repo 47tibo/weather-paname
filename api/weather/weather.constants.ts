@@ -1,5 +1,5 @@
 export enum HourSegment {
-  morning ,
+  morn ,
   day,
   eve,
   night

@@ -23,7 +23,7 @@ export interface WeatherResponse {
   daily: DailyWeather[]
 }
 
-interface HourlyWeather {
+export interface HourlyWeather {
   dt: number,
   temp: number,
   feels_like: number,
@@ -58,7 +58,7 @@ interface DailyWeather {
   wind_deg: number,
   clouds: number,
   rain: number,
-  uvi: number
+  uvi: number,
 }
 
 export interface DayWeather {

@@ -49,10 +49,12 @@ const styles = StyleSheet.create({
   }
 });
 
-export const ScrollHour = React.memo(ScrollHourComponent, (prev, next) => {
-  if (prev.day?.isToday === false && next.day?.isToday === false) {
-    return prev.day.dt === next.day.dt;
-  } else {
-    return prev.day?.isToday === next.day?.isToday
-  }
+export const ScrollHour = React.memo(
+  ScrollHourComponent,
+  (prev, next) => {
+    if (prev.day?.isToday === false && next.day?.isToday === false) {
+      return prev.day.dt === next.day.dt;
+    } else {
+      return prev.day?.isToday === next.day?.isToday;
+    }
 });
