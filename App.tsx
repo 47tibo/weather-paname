@@ -2,13 +2,14 @@ import * as React from 'react';
 import {SafeAreaView, StyleSheet, Text, Button} from 'react-native';
 import {SplashScreen} from 'expo';
 import * as Font from 'expo-font';
-import {Ionicons} from '@expo/vector-icons';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { getCurrentWeather, getDays, getHours, getWeather } from './api/weather/weather';
 import {ScrollDay} from './components/ScrollDay/ScrollDay';
 import {ScrollHour} from './components/ScrollHour/ScrollHour';
 import { HourWeather, WeatherResponse } from './api/weather/weather.models';
 import { AppProps } from './App.models';
 import { SelectedDay } from './components/ScrollDay/ScrollDay.models';
+import { WeatherCursor } from './components/WeatherCursor/WeatherCursor';
 
 const App: React.FC<AppProps> = (props) => {
   const [isLoadingComplete, setLoadingComplete] = React.useState(false);
@@ -24,7 +25,7 @@ const App: React.FC<AppProps> = (props) => {
 
         // Load fonts
         await Font.loadAsync({
-          ...Ionicons.font,
+          ...MaterialCommunityIcons.font,
           'space-mono': require('./assets/fonts/SpaceMono-Regular.ttf'),
         });
         const response = await getWeather();
@@ -46,16 +47,19 @@ const App: React.FC<AppProps> = (props) => {
   } else {
     return (
       <SafeAreaView style={styles.container}>
+        <ScrollDay
+          days={getDays(weather)}
+          onDayChange={day => setDay(day)}
+        />
+        <Text style={styles.canvas}>{JSON.stringify(getCurrentWeather(day, hour, weather))}</Text>
         <ScrollHour
           day={day}
           hours={getHours(weather, day?.isToday)}
           onHourChange={hour => setHour(hour)}
         />
-        <ScrollDay
-          days={getDays(weather)}
-          onDayChange={day => setDay(day)}
+        <WeatherCursor
+          weather={getCurrentWeather(day, hour, weather)}
         />
-        <Text>{JSON.stringify(getCurrentWeather(day, hour, weather))}</Text>
       </SafeAreaView>
     );
   }
@@ -66,6 +70,10 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
   },
+  canvas: {
+    flex: 1,
+    backgroundColor: '#ffa82c',
+  }
 });
 
 export default App;
