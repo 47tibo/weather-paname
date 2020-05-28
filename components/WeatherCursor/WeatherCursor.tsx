@@ -1,19 +1,31 @@
 import * as React from 'react';
-import { Text, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import { responsiveWidth } from 'react-native-responsive-dimensions';
 import { WeatherCursorProps } from './WeatherCursor.models';
 import { temperature, windDirection, windSpeed } from '../../utils/weather.utils';
 
-const containerWidth = responsiveWidth(33);
+const cursorWidth = responsiveWidth(33);
+const cursorHeight = responsiveWidth(66);
 
 export const WeatherCursor: React.FC<WeatherCursorProps> = ({weather}) => {
   if (weather) {
     return (
-      <View style={styles.cursor}>
-        <Text>{temperature(weather.temp)} &deg;</Text>
-        <View>
-          <Text>{windSpeed(weather.wind_speed)}</Text>
-          <Text>{windDirection(weather.wind_deg)}</Text>
+      <View
+        style={styles.container}
+        pointerEvents={'box-none'}
+      >
+        <View
+          style={styles.cursor}
+          pointerEvents={'box-none'}
+        >
+          <View style={styles.temperature}
+          >
+            <Text>{temperature(weather.temp)} &deg;</Text>
+          </View>
+          <View>
+            <Text>{windSpeed(weather.wind_speed)}</Text>
+            <Text>{windDirection(weather.wind_deg)}</Text>
+          </View>
         </View>
       </View>
     );
@@ -23,9 +35,20 @@ export const WeatherCursor: React.FC<WeatherCursorProps> = ({weather}) => {
 };
 
 const styles = {
+  container: {
+    ...StyleSheet.absoluteFillObject,
+    alignItems: 'center',
+    justifyContent: 'flex-end'
+  },
   cursor: {
-    height: 200,
-    width: containerWidth
+    height: cursorHeight,
+    width: cursorWidth,
+    backgroundColor: '#00ff1c'
+  },
+  temperature: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center'
   }
-};
+} as any;
 

@@ -27,7 +27,7 @@ export function getDays(weather: WeatherResponse | null): DayWeather[] {
   }
 }
 
-export function getHours(weather: WeatherResponse | null, isToday: boolean | undefined): HourWeather[] {
+export function getHours(weather: WeatherResponse | null, isToday = true): HourWeather[] {
   if (weather) {
     if (isToday) {
       // weather api returns hours for the next 3 days, we only want today
@@ -62,7 +62,7 @@ export function getCurrentWeather(currentDay: SelectedDay | null,
                                   weather: WeatherResponse | null): HourlyWeather | null
 {
   if (currentDay && currentHour && weather) {
-    if (currentDay.isToday) {
+    if (!currentHour.isSegment) { // today
       const hourlyWeather = weather.hourly.find(hour => hour.dt === currentHour.dt);
       return hourlyWeather || null;
     } else {
