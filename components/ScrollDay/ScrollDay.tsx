@@ -1,5 +1,4 @@
-import { FlatList, StyleSheet, View } from 'react-native';
-import styled from 'styled-components/native';
+import { FlatList, StyleSheet, Text, View } from 'react-native';
 import * as React from 'react';
 import { responsiveWidth } from 'react-native-responsive-dimensions';
 import { DayProps, ScrollDayProps, SelectedDay, ViewableItemsChangedInfo } from './ScrollDay.models';
@@ -11,9 +10,9 @@ const Day: React.FC<DayProps> = ({value}) => {
   if (value.weekday) {
     return (
       <View style={styles.day}>
-        <Title>{value.weekday}</Title>
-        <Title>{value.day}</Title>
-        <Title>{value.month}</Title>
+        <Text>{value.weekday}</Text>
+        <Text>{value.day}</Text>
+        <Text>{value.month}</Text>
       </View>
     );
   } else {
@@ -32,9 +31,6 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   }
 });
-const Title = styled.Text`
-  font-size: 20;
-`;
 
 function emptyDayWeather1(): DayWeather {
   return {

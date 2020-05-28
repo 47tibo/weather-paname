@@ -1,6 +1,5 @@
 import * as React from 'react';
-import {StyleSheet, View} from 'react-native';
-import styled from 'styled-components/native';
+import { StyleSheet, Text, View } from 'react-native';
 import { HourWeather } from '../../api/weather/weather.models';
 
 export function HoursList(hours: HourWeather[], hourWidth: number) {
@@ -20,11 +19,7 @@ export function HoursList(hours: HourWeather[], hourWidth: number) {
         style={styles.hour}
         key={hour.isSegment ? hour.dt : hour.dt.toString()}
       >
-        <Title>{hour.hour}</Title>
+        <Text>{hour.hour}</Text>
       </View>
   ));
 }
-
-const Title = styled.Text`
-  font-size: 20;
-`;
