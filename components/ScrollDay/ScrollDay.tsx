@@ -3,32 +3,44 @@ import * as React from 'react';
 import { responsiveWidth } from 'react-native-responsive-dimensions';
 import { DayProps, ScrollDayProps, SelectedDay, ViewableItemsChangedInfo } from './ScrollDay.models';
 import { DayWeather } from '../../api/weather/weather.models';
+import { TextRegular } from '../StyledText';
+import Colors from '../../constants/Colors';
 
 const dayWidth = responsiveWidth(33);
 
 const Day: React.FC<DayProps> = ({value}) => {
   if (value.weekday) {
     return (
-      <View style={styles.day}>
-        <Text>{value.weekday}</Text>
-        <Text>{value.day}</Text>
-        <Text>{value.month}</Text>
+      <View style={styles.container}>
+        <TextRegular style={styles.weekday}>{value.weekday}</TextRegular>
+        <TextRegular style={styles.day}>{value.day}</TextRegular>
+        <TextRegular style={styles.month}>{value.month}</TextRegular>
       </View>
     );
   } else {
     return (
-      <View style={styles.day}/>
+      <View style={styles.container}/>
     );
   }
 };
 
 const styles = StyleSheet.create({
-  day: {
-    backgroundColor: '#ff51db',
+  container: {
+    backgroundColor: Colors.white,
     width: dayWidth,
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center'
+  },
+  weekday: {
+    fontSize: 12
+  },
+  day: {
+    fontSize: 35,
+    color: Colors.red
+  },
+  month: {
+    fontSize: 12
   }
 });
 
