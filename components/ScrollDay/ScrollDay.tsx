@@ -1,48 +1,9 @@
-import { FlatList, StyleSheet, Text, View } from 'react-native';
+import { FlatList, StyleSheet, View } from 'react-native';
 import * as React from 'react';
-import { responsiveWidth } from 'react-native-responsive-dimensions';
-import { DayProps, ScrollDayProps, SelectedDay, ViewableItemsChangedInfo } from './ScrollDay.models';
+import { ScrollDayProps, SelectedDay, ViewableItemsChangedInfo } from './ScrollDay.models';
 import { DayWeather } from '../../api/weather/weather.models';
-import { TextRegular } from '../StyledText';
+import { Day } from './Day';
 import Colors from '../../constants/Colors';
-
-const dayWidth = responsiveWidth(33);
-
-const Day: React.FC<DayProps> = ({value}) => {
-  if (value.weekday) {
-    return (
-      <View style={styles.container}>
-        <TextRegular style={styles.weekday}>{value.weekday}</TextRegular>
-        <TextRegular style={styles.day}>{value.day}</TextRegular>
-        <TextRegular style={styles.month}>{value.month}</TextRegular>
-      </View>
-    );
-  } else {
-    return (
-      <View style={styles.container}/>
-    );
-  }
-};
-
-const styles = StyleSheet.create({
-  container: {
-    backgroundColor: Colors.white,
-    width: dayWidth,
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
-  weekday: {
-    fontSize: 12
-  },
-  day: {
-    fontSize: 35,
-    color: Colors.red
-  },
-  month: {
-    fontSize: 12
-  }
-});
 
 function emptyDayWeather1(): DayWeather {
   return {
@@ -78,7 +39,7 @@ export const ScrollDay: React.FC<ScrollDayProps> = ({days, onDayChange}) => {
   const paddedDays = [emptyDayWeather1()].concat(days).concat([emptyDayWeather2()]);
 
   return (
-    <View style={{height: 80}}>
+    <View style={styles.container}>
       <FlatList
         data={paddedDays}
         renderItem={({item}) => <Day value={item}/>}
@@ -93,3 +54,10 @@ export const ScrollDay: React.FC<ScrollDayProps> = ({days, onDayChange}) => {
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    height: 120,
+    backgroundColor: Colors.white
+  }
+});

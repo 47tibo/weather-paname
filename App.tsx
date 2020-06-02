@@ -27,8 +27,8 @@ const App: React.FC<AppProps> = (props) => {
         await Font.loadAsync({
           ...FontAwesome.font,
           ...MaterialCommunityIcons.font,
-          'NunitoSans': require('./assets/fonts/NunitoSans-Regular.ttf'),
-          'NunitoSansBold': require('./assets/fonts/NunitoSans-Bold.ttf'),
+          'FontRegular': require('./assets/fonts/NunitoSans-Regular.ttf'),
+          'FontBold': require('./assets/fonts/NunitoSans-Bold.ttf'),
         });
         const response = await getWeather();
         setWeather(response);
@@ -54,7 +54,6 @@ const App: React.FC<AppProps> = (props) => {
           onDayChange={day => setDay(day)}
         />
         <Text style={styles.canvas}>{JSON.stringify(getCurrentWeather(day, hour, weather))}</Text>
-        <FontAwesome name="square" size={200} color="red" />
         <ScrollHour
           day={day}
           hours={getHours(weather, day?.isToday)}
@@ -74,7 +73,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
   },
   canvas: {
-    //flex: 1,
+    flex: 1,
     backgroundColor: '#ffa82c',
   },
   svg: {
