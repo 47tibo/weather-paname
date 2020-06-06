@@ -1,32 +1,37 @@
 import * as React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { responsiveWidth } from 'react-native-responsive-dimensions';
 import { WeatherCursorProps } from './WeatherCursor.models';
-import { temperature, windDirection, windSpeed } from '../../utils/weather.utils';
+import { LinearGradient } from 'expo-linear-gradient';
+import { CursorTop } from './CursorTop';
+import { CursorBottom } from './CursorBottom';
 
-const cursorWidth = responsiveWidth(33);
-const cursorHeight = responsiveWidth(66);
+const cursorWidth = responsiveWidth(40);
+const cursorHeight = responsiveWidth(63);
 
 export const WeatherCursor: React.FC<WeatherCursorProps> = ({weather}) => {
   if (weather) {
     return (
       <View
         style={styles.container}
-        pointerEvents={'box-none'}
+        pointerEvents={'none'}
       >
-        <View
-          style={styles.cursor}
-          pointerEvents={'box-none'}
+        <LinearGradient
+          colors={['transparent', 'rgba(0,0,0,.15)', 'transparent', 'transparent', 'rgba(0,0,0,.15)', 'transparent']}
+          start={[0, 0.5]}
+          end={[1, 0.5]}
+          locations={[0, 0.12, 0.128, 0.872, 0.88, 1]}
+          style={styles.cursorWrapper}
         >
-          <View style={styles.temperature}
-          >
-            <Text>{temperature(weather.temp)} &deg;</Text>
+          <View style={styles.cursor}>
+            <CursorTop
+              temp={weather.temp}
+              wind_deg={weather.wind_deg}
+              wind_speed={weather.wind_speed}
+            />
+            <CursorBottom/>
           </View>
-          <View>
-            <Text>{windSpeed(weather.wind_speed)}</Text>
-            <Text>{windDirection(weather.wind_deg)}</Text>
-          </View>
-        </View>
+        </LinearGradient>
       </View>
     );
   } else {
@@ -34,21 +39,21 @@ export const WeatherCursor: React.FC<WeatherCursorProps> = ({weather}) => {
   }
 };
 
-const styles = {
+const styles = StyleSheet.create({
   container: {
     ...StyleSheet.absoluteFillObject,
     alignItems: 'center',
     justifyContent: 'flex-end'
   },
-  cursor: {
+  cursorWrapper: {
     height: cursorHeight,
     width: cursorWidth,
-    backgroundColor: '#00ff1c'
+    paddingLeft: 17,
+    paddingRight: 17,
   },
-  temperature: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center'
+  cursor: {
+    backgroundColor: 'rgba(75,145,255,0.15)',
+    flex: 1
   }
-} as any;
+});
 

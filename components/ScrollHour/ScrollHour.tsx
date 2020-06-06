@@ -3,6 +3,7 @@ import { NativeScrollEvent, NativeSyntheticEvent, ScrollView, ScrollViewComponen
 import {responsiveWidth,} from "react-native-responsive-dimensions";
 import {HoursList} from './HoursList';
 import { ScrollHourProps } from './ScrollHour.models';
+import Colors from '../../constants/Colors';
 
 const hourWidth = responsiveWidth(33);
 
@@ -20,7 +21,7 @@ const ScrollHourComponent: React.FC<ScrollHourProps> = ({day, hours, onHourChang
   }
 
   return (
-    <View style={{height: 80}}>
+    <View style={styles.container}>
       <ScrollView
         ref={scrollViewRef}
         snapToInterval={hourWidth}
@@ -42,8 +43,11 @@ const ScrollHourComponent: React.FC<ScrollHourProps> = ({day, hours, onHourChang
 };
 
 const styles = StyleSheet.create({
+  container: {
+    height: 80,
+    backgroundColor: Colors.white
+  },
   emptyHour: {
-    backgroundColor: '#7183ff',
     width: hourWidth,
     flex: 1
   }

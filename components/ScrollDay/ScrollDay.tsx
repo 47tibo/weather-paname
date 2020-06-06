@@ -29,11 +29,13 @@ export const ScrollDay: React.FC<ScrollDayProps> = ({days, onDayChange}) => {
     const viewableItems = info.viewableItems;
     const length = viewableItems.length;
     const itemCenter = viewableItems[length - 2];
-    const day: SelectedDay = {
-      dt: itemCenter.item.dt,
-      isToday: itemCenter.index === 1
-    };
-    onDayChange(day);
+    if (itemCenter) {
+      const day: SelectedDay = {
+        dt: itemCenter.item.dt,
+        isToday: itemCenter.index === 1
+      };
+      onDayChange(day);
+    }
   });
   const viewConfigRef = React.useRef({viewAreaCoveragePercentThreshold: 100});
   const paddedDays = [emptyDayWeather1()].concat(days).concat([emptyDayWeather2()]);
@@ -57,7 +59,8 @@ export const ScrollDay: React.FC<ScrollDayProps> = ({days, onDayChange}) => {
 
 const styles = StyleSheet.create({
   container: {
-    height: 120,
+    paddingTop: 20,
+    height: 150,
     backgroundColor: Colors.white
   }
 });

@@ -6,14 +6,13 @@ import { TextRegular } from '../StyledText';
 export function HoursList(hours: HourWeather[], hourWidth: number) {
   const styles = StyleSheet.create({
     container: {
-      backgroundColor: '#7183ff',
       width: hourWidth,
       flex: 1,
       justifyContent: 'center',
       alignItems: 'center'
     },
     hour: {
-      fontSize: 20
+      fontSize: 15
     }
   });
 

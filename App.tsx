@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {SafeAreaView, StyleSheet, Text, Button} from 'react-native';
+import {View, StyleSheet, Text, Button} from 'react-native';
 import {SplashScreen} from 'expo';
 import * as Font from 'expo-font';
 import { FontAwesome, MaterialCommunityIcons } from '@expo/vector-icons';
@@ -48,7 +48,7 @@ const App: React.FC<AppProps> = (props) => {
     return null;
   } else {
     return (
-      <SafeAreaView style={styles.container}>
+      <View style={styles.container}>
         <ScrollDay
           days={getDays(weather)}
           onDayChange={day => setDay(day)}
@@ -62,22 +62,18 @@ const App: React.FC<AppProps> = (props) => {
         <WeatherCursor
           weather={getCurrentWeather(day, hour, weather)}
         />
-      </SafeAreaView>
+      </View>
     );
   }
 };
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: '#fff',
+    flex: 1
   },
   canvas: {
     flex: 1,
-    backgroundColor: '#ffa82c',
-  },
-  svg: {
-    backgroundColor: '#ff75e5'
+    backgroundColor: '#fff2e4',
   }
 });
 

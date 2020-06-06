@@ -13,7 +13,7 @@ export const Day: React.FC<DayProps> = ({value}) => {
     return (
       <View style={styles.container}>
         <View style={styles.centeredSquare}>
-          <FontAwesome name="square" size={100} color="#cacaca" style={styles.backgroundIcon}/>
+          <FontAwesome name="square" size={100} color={Colors.lightGrey} style={styles.backgroundIcon}/>
           <TextRegular style={styles.weekday}>{value.weekday}</TextRegular>
           <TextRegular style={styles.day}>{value.day}</TextRegular>
           <TextRegular style={styles.month}>{value.month}</TextRegular>
@@ -49,7 +49,9 @@ const styles = StyleSheet.create({
     position: 'relative'
   },
   day: {
-    fontSize: 28,
+    marginTop: -7,
+    marginBottom: -10,
+    fontSize: 34,
     color: Colors.red,
     position: 'relative'
   },
