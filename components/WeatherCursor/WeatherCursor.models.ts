@@ -8,4 +8,5 @@ export type CursorTopProps = {
   temp: number,
   wind_speed: number,
   wind_deg: number,
+  cursorWidth: number
 }

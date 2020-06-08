@@ -6,7 +6,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { CursorTop } from './CursorTop';
 import { CursorBottom } from './CursorBottom';
 
-const cursorWidth = responsiveWidth(40);
+const cursorWidth = responsiveWidth(45);
 const cursorHeight = responsiveWidth(63);
 
 export const WeatherCursor: React.FC<WeatherCursorProps> = ({weather}) => {
@@ -25,6 +25,7 @@ export const WeatherCursor: React.FC<WeatherCursorProps> = ({weather}) => {
         >
           <View style={styles.cursor}>
             <CursorTop
+              cursorWidth={cursorWidth}
               temp={weather.temp}
               wind_deg={weather.wind_deg}
               wind_speed={weather.wind_speed}
@@ -48,8 +49,8 @@ const styles = StyleSheet.create({
   cursorWrapper: {
     height: cursorHeight,
     width: cursorWidth,
-    paddingLeft: 17,
-    paddingRight: 17,
+    paddingLeft: 19,
+    paddingRight: 19,
   },
   cursor: {
     backgroundColor: 'rgba(75,145,255,0.15)',

@@ -3,7 +3,7 @@ export function temperature(temp: number): string {
 }
 
 export function windSpeed(speed: number): string {
-  return `${Math.round(speed * 3.6)} km/h`;
+  return `${Math.round(speed * 3.6)}km/h`;
 }
 
 // https://gist.github.com/felipeskroski/8aec22f01dabdbf8fb6b
