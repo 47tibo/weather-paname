@@ -6,6 +6,10 @@ enum Hour {
   _2,
   _3,
   _4,
+  _5,
+  _6,
+  _7,
+  _8,
 }
 
 export const HourIconEnum = {...HourSegment, ...Hour};

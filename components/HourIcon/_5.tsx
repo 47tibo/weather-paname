@@ -8,9 +8,9 @@ import Svg, {
   Circle,
 } from "react-native-svg"
 
-export function _5(props: any) {
+export default function _5(props: any) {
   return (
-    <Svg viewBox="0 0 420 852" {...props}>
+    <Svg viewBox="0 0 420 850" preserveAspectRatio="xMidYMax slice" {...props}>
       <Defs>
         <LinearGradient id="prefix__a" x1="50%" x2="50%" y1="0%" y2="99.2%">
           <Stop offset="0%" stopColor="#0A2638" />

@@ -13,7 +13,7 @@ export const WeatherCanvas: React.FC<WeatherCanvasProps> = ({weather, hour}) => 
         </View>
       );
     } else {
-      return <View style={styles.svg}/>;
+      return <View style={styles.container}/>;
     }
   } else {
     return null

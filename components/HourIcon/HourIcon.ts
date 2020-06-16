@@ -1,10 +1,13 @@
-import { HourWeather } from '../../api/weather/weather.models';
-import { HourIconEnum } from '../../constants/HourIconEnum';
-import { HourSegment } from '../../api/weather/weather.constants';
-import  _0  from './_0';
-import { FunctionComponent } from 'react';
+import {HourWeather} from '../../api/weather/weather.models';
+import {HourIconEnum} from '../../constants/HourIconEnum';
+import {HourSegment} from '../../api/weather/weather.constants';
+import _0 from './_0';
+import {FunctionComponent} from 'react';
 import _4 from './_4';
 import _6 from './_6';
+import _8 from "./_8";
+import _7 from "./_7";
+import _5 from "./_5";
 
 export class HourIcon {
   private static instance: HourIcon;
@@ -15,7 +18,10 @@ export class HourIcon {
     [HourIconEnum._2, _0],
     [HourIconEnum._3, _0],
     [HourIconEnum._4, _4],
+    [HourIconEnum.morn, _8],
     [HourIconEnum.night, _6],
+    [HourIconEnum.day, _7],
+    [HourIconEnum.eve, _5],
   ]);
 
   public static get(hour: HourWeather): FunctionComponent | null {
