@@ -18,10 +18,10 @@ export class HourIcon {
     [HourIconEnum._2, _0],
     [HourIconEnum._3, _0],
     [HourIconEnum._4, _4],
-    [HourIconEnum.morn, _8],
-    [HourIconEnum.night, _6],
-    [HourIconEnum.day, _7],
+    [HourIconEnum.morn, _7],
+    [HourIconEnum.day, _8],
     [HourIconEnum.eve, _5],
+    [HourIconEnum.night, _6],
   ]);
 
   public static get(hour: HourWeather): FunctionComponent | null {
