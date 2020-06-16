@@ -1,15 +1,16 @@
 import * as React from 'react';
-import {View, StyleSheet, Text, Button} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import {SplashScreen} from 'expo';
 import * as Font from 'expo-font';
-import { FontAwesome, MaterialCommunityIcons } from '@expo/vector-icons';
-import { getCurrentWeather, getDays, getHours, getWeather } from './api/weather/weather';
+import {FontAwesome, MaterialCommunityIcons} from '@expo/vector-icons';
+import {getCurrentWeather, getDays, getHours, getWeather} from './api/weather/weather';
 import {ScrollDay} from './components/ScrollDay/ScrollDay';
 import {ScrollHour} from './components/ScrollHour/ScrollHour';
-import { HourWeather, WeatherResponse } from './api/weather/weather.models';
-import { AppProps } from './App.models';
-import { SelectedDay } from './components/ScrollDay/ScrollDay.models';
-import { WeatherCursor } from './components/WeatherCursor/WeatherCursor';
+import {HourWeather, WeatherResponse} from './api/weather/weather.models';
+import {AppProps} from './App.models';
+import {SelectedDay} from './components/ScrollDay/ScrollDay.models';
+import {WeatherCursor} from './components/WeatherCursor/WeatherCursor';
+import {WeatherCanvas} from "./components/WeatherCanvas/WeatherCanvas";
 
 const App: React.FC<AppProps> = (props) => {
   const [isLoadingComplete, setLoadingComplete] = React.useState(false);
@@ -27,8 +28,8 @@ const App: React.FC<AppProps> = (props) => {
         await Font.loadAsync({
           ...FontAwesome.font,
           ...MaterialCommunityIcons.font,
-          'FontRegular': require('./assets/fonts/NunitoSans-Regular.ttf'),
-          'FontBold': require('./assets/fonts/NunitoSans-Bold.ttf'),
+          'FontRegular': require('./assets/fonts/Inter-Regular.ttf'),
+          'FontBold': require('./assets/fonts/Inter-Bold.ttf'),
         });
         const response = await getWeather();
         setWeather(response);
@@ -53,7 +54,10 @@ const App: React.FC<AppProps> = (props) => {
           days={getDays(weather)}
           onDayChange={day => setDay(day)}
         />
-        <Text style={styles.canvas}>{JSON.stringify(getCurrentWeather(day, hour, weather))}</Text>
+        <WeatherCanvas
+          weather={getCurrentWeather(day, hour, weather)}
+          hour={hour}
+        />
         <ScrollHour
           day={day}
           hours={getHours(weather, day?.isToday)}

@@ -23,7 +23,13 @@ export const WeatherCursor: React.FC<WeatherCursorProps> = ({weather}) => {
           locations={[0, 0.12, 0.128, 0.872, 0.88, 1]}
           style={styles.cursorWrapper}
         >
-          <View style={styles.cursor}>
+          <LinearGradient
+            start={[0.5, 0]}
+            end={[0.5, 1]}
+            colors={['rgba(81,144,236,0.23)', 'rgba(185,198,249,0.41)', 'rgba(194, 206, 252, .2)']}
+            locations={[0, 0.61, 1]}
+            style={styles.cursor}
+          >
             <CursorTop
               cursorWidth={cursorWidth}
               temp={weather.temp}
@@ -31,7 +37,7 @@ export const WeatherCursor: React.FC<WeatherCursorProps> = ({weather}) => {
               wind_speed={weather.wind_speed}
             />
             <CursorBottom/>
-          </View>
+          </LinearGradient>
         </LinearGradient>
       </View>
     );
@@ -53,7 +59,6 @@ const styles = StyleSheet.create({
     paddingRight: 19,
   },
   cursor: {
-    backgroundColor: 'rgba(75,145,255,0.15)',
     flex: 1
   }
 });

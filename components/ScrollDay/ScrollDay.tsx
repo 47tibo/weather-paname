@@ -60,7 +60,7 @@ export const ScrollDay: React.FC<ScrollDayProps> = ({days, onDayChange}) => {
 const styles = StyleSheet.create({
   container: {
     paddingTop: 20,
-    height: 150,
+    height: 145,
     backgroundColor: Colors.white
   }
 });

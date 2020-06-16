@@ -71,5 +71,5 @@ export interface DayWeather {
 export interface HourWeather {
   isSegment: boolean;
   dt: number | HourSegment;
-  hour: string
+  hour: string // "1:00"
 }
