@@ -1,5 +1,4 @@
 import {HourWeather} from '../../api/weather/weather.models';
-import {HourIconEnum} from '../../constants/HourIconEnum';
 import {HourSegment} from '../../api/weather/weather.constants';
 import _0 from './_0';
 import {FunctionComponent} from 'react';
@@ -23,39 +22,42 @@ import _20 from "./_20";
 import _21 from "./_21";
 import _22 from "./_22";
 import _23 from "./_23";
+import {HourEnum} from "../../constants/HourIconEnum";
 
 export class HourIcon {
   private static instance: HourIcon;
 
-  private _icons = new Map<any, FunctionComponent>([
-    [HourIconEnum._0, _0],
-    [HourIconEnum._1, _0],
-    [HourIconEnum._2, _0],
-    [HourIconEnum._3, _0],
-    [HourIconEnum._4, _4],
-    [HourIconEnum._5, _5],
-    [HourIconEnum._6, _6],
-    [HourIconEnum._7, _7],
-    [HourIconEnum._8, _8],
-    [HourIconEnum._9, _9],
-    [HourIconEnum._10, _10],
-    [HourIconEnum._11, _11],
-    [HourIconEnum._12, _12],
-    [HourIconEnum._13, _13],
-    [HourIconEnum._14, _14],
-    [HourIconEnum._15, _15],
-    [HourIconEnum._16, _16],
-    [HourIconEnum._17, _17],
-    [HourIconEnum._18, _18],
-    [HourIconEnum._19, _19],
-    [HourIconEnum._20, _20],
-    [HourIconEnum._21, _21],
-    [HourIconEnum._22, _22],
-    [HourIconEnum._23, _23],
-    [HourIconEnum.morn, _7],
-    [HourIconEnum.day, _12],
-    [HourIconEnum.eve, _19],
-    [HourIconEnum.night, _23],
+  private _hourEnums = new Map<any, FunctionComponent>([
+    [HourEnum._0, _0],
+    [HourEnum._1, _0],
+    [HourEnum._2, _0],
+    [HourEnum._3, _0],
+    [HourEnum._4, _4],
+    [HourEnum._5, _5],
+    [HourEnum._6, _6],
+    [HourEnum._7, _7],
+    [HourEnum._8, _8],
+    [HourEnum._9, _9],
+    [HourEnum._10, _10],
+    [HourEnum._11, _11],
+    [HourEnum._12, _12],
+    [HourEnum._13, _13],
+    [HourEnum._14, _14],
+    [HourEnum._15, _15],
+    [HourEnum._16, _16],
+    [HourEnum._17, _17],
+    [HourEnum._18, _18],
+    [HourEnum._19, _19],
+    [HourEnum._20, _20],
+    [HourEnum._21, _21],
+    [HourEnum._22, _22],
+    [HourEnum._23, _23]
+  ]);
+  private _hourSegments = new Map<any, FunctionComponent>([
+    [HourSegment.morn, _7],
+    [HourSegment.day, _12],
+    [HourSegment.eve, _19],
+    [HourSegment.night, _23],
   ]);
 
   public static get(hour: HourWeather): FunctionComponent | null {
@@ -65,9 +67,9 @@ export class HourIcon {
 
     let icon;
     if (hour.isSegment) {
-      icon = HourIcon.instance._icons.get(hour.dt as HourSegment);
+      icon = HourIcon.instance._hourSegments.get(hour.dt as HourSegment);
     } else {
-      icon = HourIcon.instance._icons.get(`_${hour.hour.replace(':00', '')}`);
+      icon = HourIcon.instance._hourEnums.get(`_${hour.hour.replace(':00', '')}`);
     }
     return icon || null;
   }

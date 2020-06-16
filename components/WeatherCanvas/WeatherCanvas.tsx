@@ -8,7 +8,7 @@ export const WeatherCanvas: React.FC<WeatherCanvasProps> = ({weather, hour}) => 
     const HourIconComponent = HourIcon.get(hour) as any;
     if (HourIconComponent) {
       return (
-        <View style={styles.container}>
+        <View style={styles.container} pointerEvents={'none'}>
           <HourIconComponent style={styles.svg}/>
         </View>
       );
