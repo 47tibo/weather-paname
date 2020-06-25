@@ -5,12 +5,14 @@ import { WeatherCursorProps } from './WeatherCursor.models';
 import { LinearGradient } from 'expo-linear-gradient';
 import { CursorTop } from './CursorTop';
 import { CursorBottom } from './CursorBottom';
+import useDebounce from "../../utils/debounce.hook";
 
 const cursorWidth = responsiveWidth(45);
 const cursorHeight = responsiveWidth(63);
 
 export const WeatherCursor: React.FC<WeatherCursorProps> = ({weather}) => {
-  if (weather) {
+  const debouncedWeather = useDebounce(weather);
+  if (debouncedWeather) {
     return (
       <View
         style={styles.container}
@@ -32,9 +34,9 @@ export const WeatherCursor: React.FC<WeatherCursorProps> = ({weather}) => {
           >
             <CursorTop
               cursorWidth={cursorWidth}
-              temp={weather.temp}
-              wind_deg={weather.wind_deg}
-              wind_speed={weather.wind_speed}
+              temp={debouncedWeather.temp}
+              wind_deg={debouncedWeather.wind_deg}
+              wind_speed={debouncedWeather.wind_speed}
             />
             <CursorBottom/>
           </LinearGradient>

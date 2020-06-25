@@ -74,10 +74,6 @@ const App: React.FC<AppProps> = (props) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1
-  },
-  canvas: {
-    flex: 1,
-    backgroundColor: '#fff2e4',
   }
 });
 
