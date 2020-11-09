@@ -32,6 +32,12 @@ export interface HourlyWeather {
   clouds: number,
   wind_speed: number,
   wind_deg: number,
+  weather: [
+    {
+      description: string,
+      icon: string
+    }
+  ],
 }
 
 interface DailyWeather {
@@ -63,7 +69,7 @@ interface DailyWeather {
 
 export interface DayWeather {
   dt: number
-  weekday: string, // "Sat"
+  weekday: string, // Sat"
   month: string, // "June"
   day: string,
 }
