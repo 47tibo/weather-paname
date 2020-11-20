@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {StyleSheet, View} from 'react-native';
-import {SplashScreen} from 'expo';
+import * as SplashScreen from 'expo-splash-screen';
 import * as Font from 'expo-font';
 import {FontAwesome, MaterialCommunityIcons} from '@expo/vector-icons';
 import {getCurrentWeather, getDays, getHours, getWeather} from './api/weather/weather';
@@ -22,7 +22,7 @@ const App: React.FC<AppProps> = (props) => {
   React.useEffect(() => {
     async function loadResourcesAndDataAsync() {
       try {
-        SplashScreen.preventAutoHide();
+        await SplashScreen.preventAutoHideAsync();
 
         // Load fonts
         await Font.loadAsync({
@@ -38,7 +38,7 @@ const App: React.FC<AppProps> = (props) => {
         console.warn(e);
       } finally {
         setLoadingComplete(true);
-        SplashScreen.hide();
+        await SplashScreen.hideAsync();
       }
     }
 
