@@ -1,4 +1,3 @@
-import axios from 'axios';
 import { WEATHER_URL } from '../api.constants';
 import { getDate, getMonth, getWeekDay, isSameDay } from '../../utils/date/date.utils';
 import { DayWeather, HourlyWeather, HourWeather, WeatherResponse } from './weather.models';
@@ -7,8 +6,9 @@ import { SelectedDay } from '../../components/ScrollDay/ScrollDay.models';
 import { HourSegment } from './weather.constants';
 
 export async function getWeather() {
-  let response = await axios.get(WEATHER_URL);
-  return response.data;
+  const response = await fetch(WEATHER_URL);
+  const json = await response.json();
+  return json;
 }
 
 export function getDays(weather: WeatherResponse | null): DayWeather[] {

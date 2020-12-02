@@ -13,8 +13,6 @@
   },
   "dependencies": {
     "@expo/vector-icons": "^10.0.0",
-    "axios": "^0.19.2",
-    "axios-hooks": "^1.10.0",
     "expo": "~39.0.2",
     "expo-asset": "~8.2.0",
     "expo-constants": "~9.2.0",
