@@ -1,5 +1,5 @@
-import {HourWeather} from '../../api/weather/weather.models';
-import {HourSegment} from '../../api/weather/weather.constants';
+import {HourWeather} from '../../../api/weather/weather.models';
+import {HourSegment} from '../../../api/weather/weather.constants';
 import _0 from './_0';
 import {FunctionComponent} from 'react';
 import _4 from './_4';
@@ -22,7 +22,7 @@ import _20 from "./_20";
 import _21 from "./_21";
 import _22 from "./_22";
 import _23 from "./_23";
-import {HourEnum} from "../../constants/HourIconEnum";
+import {HourEnum} from "../../../constants/HourIconEnum";
 
 export class HourIcon {
   private static instance: HourIcon;

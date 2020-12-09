@@ -1,9 +1,10 @@
 import React from 'react';
 import {WeatherCanvasProps} from './WeatherCanvasProps';
 import {StyleSheet, View} from 'react-native';
-import {HourIcon} from '../HourIcon/HourIcon';
+import {HourIcon} from './HourIcon/HourIcon';
 import useDebounce from "../../utils/debounce.hook";
-import {WeatherConditionImage} from "../WeatherConditionImage/WeatherConditionImage";
+import {WeatherConditionImage} from "./WeatherConditionImage/WeatherConditionImage";
+import {CityText} from './CityText/CityText';
 
 export const WeatherCanvas: React.FC<WeatherCanvasProps> = (props) => {
   const debouncedProps = useDebounce(props);
@@ -12,6 +13,7 @@ export const WeatherCanvas: React.FC<WeatherCanvasProps> = (props) => {
     const HourIconSvg = HourIcon.get(debouncedProps.hour) as any;
     return (
       <View style={styles.container} pointerEvents={'none'}>
+        <CityText style={styles.cityText}/>
         <WeatherConditionImage iconCode={weather.icon} style={styles.weatherCondition}/>
         <HourIconSvg style={styles.hour}/>
       </View>
@@ -22,12 +24,16 @@ export const WeatherCanvas: React.FC<WeatherCanvasProps> = (props) => {
 };
 
 const styles = StyleSheet.create({
-  hour: {
-    flex: 1
+  cityText: {
+    ...StyleSheet.absoluteFillObject,
+    zIndex: 2
   },
   weatherCondition: {
     ...StyleSheet.absoluteFillObject,
     zIndex: 1
+  },
+  hour: {
+    flex: 1
   },
   container: {
     flex: 1

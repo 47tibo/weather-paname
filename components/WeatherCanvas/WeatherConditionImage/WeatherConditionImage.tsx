@@ -2,8 +2,8 @@ import React from "react";
 import {WeatherConditionImageProps} from "./WeatherConditionImageProps";
 import {Image, View} from "react-native";
 import {responsiveWidth} from "react-native-responsive-dimensions";
-import {WeatherConditionImageEnum} from "../../constants/WeatherConditionImageEnum";
-import {AWS_URL} from "../../api/api.constants";
+import {WeatherConditionImageEnum} from "../../../constants/WeatherConditionImageEnum";
+import {AWS_URL} from "../../../api/api.constants";
 
 const fullWidth = responsiveWidth(100);
 
