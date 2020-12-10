@@ -4,6 +4,7 @@ import { ScrollDayProps, SelectedDay, ViewableItemsChangedInfo } from './ScrollD
 import { DayWeather } from '../../api/weather/weather.models';
 import { Day } from './Day';
 import Colors from '../../constants/Colors';
+import {Cursor} from './Cursor';
 
 function emptyDayWeather1(): DayWeather {
   return {
@@ -53,6 +54,7 @@ export const ScrollDay: React.FC<ScrollDayProps> = ({days, onDayChange}) => {
         bounces={false}
         scrollEventThrottle={16}
       />
+      <Cursor/>
     </View>
   );
 };

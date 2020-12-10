@@ -1,7 +1,7 @@
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
-import {TextBold} from '../../StyledText';
-import Colors from '../../../constants/Colors';
+import {TextBold} from '../StyledText';
+import Colors from '../../constants/Colors';
 
 export const CityText: React.FC<any> = (props: any) => {
   return (

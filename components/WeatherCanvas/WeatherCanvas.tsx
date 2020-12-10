@@ -4,7 +4,7 @@ import {StyleSheet, View} from 'react-native';
 import {HourIcon} from './HourIcon/HourIcon';
 import useDebounce from "../../utils/debounce.hook";
 import {WeatherConditionImage} from "./WeatherConditionImage/WeatherConditionImage";
-import {CityText} from './CityText/CityText';
+import {CityText} from './CityText';
 
 export const WeatherCanvas: React.FC<WeatherCanvasProps> = (props) => {
   const debouncedProps = useDebounce(props);
