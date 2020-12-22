@@ -1,8 +1,8 @@
 {
   "expo": {
     "privacy": "public",
-    "name": "weather",
-    "slug": "weather",
+    "name": "Météo Paname",
+    "slug": "weather-paname",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",

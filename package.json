@@ -1,10 +1,17 @@
 {
+  "name": "weather-paname",
+  "version": "1.0.0",
+  "license": "MIT",
+  "description": "Weather in Paris within one week",
+  "author": "Thibaut Gilbert <47tibo@gmail.com>",
+  "contributors": [
+    "Stéphane Romano"
+  ],
   "main": "node_modules/expo/AppEntry.js",
   "scripts": {
     "start": "expo start",
     "android": "expo start --android",
     "ios": "expo start --ios",
-    "web": "expo start --web",
     "eject": "expo eject",
     "test": "jest --watchAll"
   },
@@ -15,14 +22,10 @@
     "@expo/vector-icons": "^10.0.0",
     "expo": "~39.0.2",
     "expo-asset": "~8.2.0",
-    "expo-constants": "~9.2.0",
     "expo-font": "~8.3.0",
-    "expo-web-browser": "~8.5.0",
     "react": "16.13.1",
-    "react-dom": "16.13.1",
     "react-native": "https://github.com/expo/react-native/archive/sdk-39.0.4.tar.gz",
     "react-native-responsive-dimensions": "^3.1.1",
-    "react-native-web": "~0.13.12",
     "expo-linear-gradient": "~8.3.0",
     "react-native-svg": "12.1.0",
     "expo-splash-screen": "~0.6.2"

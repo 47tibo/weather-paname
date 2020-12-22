@@ -34,8 +34,6 @@ const App: React.FC<AppProps> = (props) => {
         const response = await getWeather();
         setWeather(response);
       } catch (e) {
-        // We might want to provide this error information to an error reporting service
-        console.warn(e);
       } finally {
         setLoadingComplete(true);
         await SplashScreen.hideAsync();

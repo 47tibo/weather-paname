@@ -7,8 +7,7 @@ import { HourSegment } from './weather.constants';
 
 export async function getWeather() {
   const response = await fetch(WEATHER_URL);
-  const json = await response.json();
-  return json;
+  return await response.json();
 }
 
 export function getDays(weather: WeatherResponse | null): DayWeather[] {
