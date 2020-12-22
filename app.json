@@ -4,7 +4,10 @@
     "name": "Météo Paname",
     "slug": "weather-paname",
     "version": "1.0.0",
+    "description": "Weather in Paris within one week",
+    "githubUrl": "https://github.com/47tibo/weather-paname",
     "orientation": "portrait",
+    "primaryColor": "#56C5F9",
     "icon": "./assets/images/icon.png",
     "splash": {
       "image": "./assets/images/splash.png",
