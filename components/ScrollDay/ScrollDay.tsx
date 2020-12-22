@@ -5,6 +5,7 @@ import { DayWeather } from '../../api/weather/weather.models';
 import { Day } from './Day';
 import Colors from '../../constants/Colors';
 import {Cursor} from './Cursor';
+import {responsiveWidth,} from "react-native-responsive-dimensions";
 
 function emptyDayWeather1(): DayWeather {
   return {
@@ -23,6 +24,8 @@ function emptyDayWeather2(): DayWeather {
     weekday: '',
   };
 }
+
+const itemWidth = responsiveWidth(33);
 
 export const ScrollDay: React.FC<ScrollDayProps> = ({days, onDayChange}) => {
   const onViewRef = React.useRef((info: ViewableItemsChangedInfo) => {
@@ -53,6 +56,9 @@ export const ScrollDay: React.FC<ScrollDayProps> = ({days, onDayChange}) => {
         onViewableItemsChanged={onViewRef.current}
         bounces={false}
         scrollEventThrottle={16}
+        getItemLayout={(_data, index) => (
+          {length: itemWidth, offset: itemWidth * index, index}
+        )}
       />
       <Cursor/>
     </View>
