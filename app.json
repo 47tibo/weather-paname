@@ -22,9 +22,13 @@
     ],
     "ios": {
       "supportsTablet": false,
-      "icon": "./assets/images/icon.png"
+      "icon": "./assets/images/icon.png",
+      "bundleIdentifier": "com.tibo47.weatherPaname",
+      "buildNumber": "1.0.0"
     },
     "android": {
+      "package": "com.tibo47.weatherPaname",
+      "versionCode": 1,
       "icon": "./assets/images/icon.png",
       "adaptiveIcon": {
         "backgroundColor": "#56C5F9",
