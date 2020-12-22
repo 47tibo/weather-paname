@@ -1,5 +1,6 @@
 {
   "expo": {
+    "privacy": "public",
     "name": "weather",
     "slug": "weather",
     "version": "1.0.0",
@@ -8,7 +9,7 @@
     "splash": {
       "image": "./assets/images/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#56C5F9"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
@@ -17,12 +18,15 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": false,
+      "icon": "./assets/images/icon.png"
     },
     "android": {
+      "icon": "./assets/images/icon.png",
       "adaptiveIcon": {
-        "foregroundImage": "./assets/images/adaptive-icon.png",
-        "backgroundColor": "#FFFFFF"
+        "backgroundColor": "#56C5F9",
+        "foregroundImage": "./assets/images/adaptative-icon-foreground.png",
+        "backgroundImage": "./assets/images/adaptative-icon-background.png"
       }
     },
     "web": {
